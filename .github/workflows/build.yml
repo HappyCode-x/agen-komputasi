@@ -21,10 +21,11 @@ jobs:
           pip install --upgrade buildozer cython virtualenv
 
       - name: 4. Mulai Ngerakit APK!
-        run: buildozer android debug
+        run: yes | buildozer android debug
 
       - name: 5. Simpan Hasil APK
         uses: actions/upload-artifact@v4
         with:
           name: Aplikasi-Pekerja-Virtual
           path: bin/*.apk
+          
