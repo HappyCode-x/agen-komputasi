@@ -6,16 +6,24 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-      - name: Tarik Kode Lu
+      - name: 1. Tarik Kode Lu
         uses: actions/checkout@v4
 
-      - name: Mulai Merakit APK (Buildozer)
-        uses: ArtemSBulgakov/buildozer-action@v1
+      - name: 2. Siapin Mesin Python Baru
+        uses: actions/setup-python@v5
         with:
-          command: buildozer android debug
-          buildozer_version: stable
+          python-version: '3.10'
 
-      - name: Simpan APK Biar Bisa Didownload
+      - name: 3. Pasang Peralatan Kuli Manual (Anti Gagal)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git zip unzip openjdk-17-jdk autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo5 cmake libffi-dev libssl-dev
+          pip install --upgrade buildozer cython virtualenv
+
+      - name: 4. Mulai Ngerakit APK!
+        run: buildozer android debug
+
+      - name: 5. Simpan Hasil APK
         uses: actions/upload-artifact@v4
         with:
           name: Aplikasi-Pekerja-Virtual
