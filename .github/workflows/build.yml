@@ -1,0 +1,22 @@
+name: Build APK
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Tarik Kode Lu
+        uses: actions/checkout@v4
+
+      - name: Mulai Merakit APK (Buildozer)
+        uses: ArtemSBulgakov/buildozer-action@v1
+        with:
+          command: buildozer android debug
+          buildozer_version: stable
+
+      - name: Simpan APK Biar Bisa Didownload
+        uses: actions/upload-artifact@v4
+        with:
+          name: Aplikasi-Pekerja-Virtual
+          path: bin/*.apk
